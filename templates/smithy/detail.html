@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+    <div>
+        <div style="text-align: center; max-width: 300px; margin: 4rem auto;">
+            <p>
+                {{ user.date_joined }}  
+            </p>
+            <h2>
+                {{ user.username }}
+            </h2>
+
+            {% if user == user %}
+                <p>Change Info</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

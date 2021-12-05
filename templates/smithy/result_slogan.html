@@ -1,0 +1,64 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="mainbox__result">
+  <form action="/smithy/loading/" method="POST">
+    {% csrf_token %}
+    <div class="inputbox">
+      <select class="Inputbox__selectArea" name="select" id="select" autofocus="{{ select }}">
+        <option value="ko_slogan" {% if select == "ko_slogan" %} selected {% endif %}>Korean</option>
+        <option value="en_slogan" {% if select == "en_slogan" %} selected {% endif %}>English</option>
+        <option value="model_slogan" {% if select == "model_slogan" %} selected {% endif %}>Beta Korean</option>
+      </select>
+      <input type="text" name="info" class="inputbox__inputtext" placeholder="기업설명 혹은 제품설명을 간략히 적어주세요."
+        onclick="this.placeholder=''" onblur="this.placeholder='기업설명 혹은 제품설명을 간략히 적어주세요.'" value="{{ info }}" />
+      <div class="inputbox__controlbox">
+        <div class="range">
+          <div class="sliderValue">
+            <span class="valueNumber">35</span>
+          </div>
+          <div class="field">
+            <div class="value left">1</div>
+            <input class="valueInput" value="{{ sim }}" type="range" name="sim" min="1" max="70" step="1" />
+            <div class="value right">70</div>
+          </div>
+        </div>
+      </div>
+      <input type="submit" class="Inputbox__submitArea" value="" />
+    </div>
+  </form>
+</div>
+
+<div class="wrapper_slogans">
+  {% if select == 'ko_slogan' %}
+  {% for list in slogans %}
+  <div>
+    <div class="wrapper_slogan__ko">
+      {% for slogan in list %}
+      <div value="{{slogan}}" class="open">{{ slogan }}</div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  {% for slogan in slogans %}
+  <div>
+    <div class="wrapper_slogan__en">
+      <div value="{{slogan}}" class="open">{{ slogan }}</div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+  <div class="modal hidden">
+    <div class="modal__overlay">
+    </div>
+    <div class="modal__content">
+      <div class="modal__input" id="sloganModalText"></div>
+      <button class="x_button"></button>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

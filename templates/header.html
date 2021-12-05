@@ -1,0 +1,26 @@
+<nav class="navbar">
+
+    <div class="navar__logo">
+        <a href="{% url 'smithy:index' %}" class="navbar__logo">slogan smithy</a>
+    </div>
+
+    <ul class="navbar__menu">
+        {% if not user.is_authenticated %}
+        <li><a href="{% url 'smithy:index' %}">Home</a></li>
+        <li><a href="{% url 'smithy:create' %}">SignUp</a></li>
+        <li><a href="{% url 'smithy:login' %}?next={{ request.path }}">Login</a></li>
+        {% else %}
+        <li><a href="{% url 'smithy:detail' pk=user.pk %}">MyPage</a></li>
+        <li><a href="{% url 'smithy:logout' %}?next={{ request.path }}">logout</a></li>
+        {% endif %}
+    </ul>
+    <ul class="navbar__icons">
+        <li><a href=""><i class="fab fa-github"></i></a></li>
+        <li><a href=""><i class="fab fa-instagram"></i></a></li>
+    </ul>
+    <a href="#" class="navbar__toogleBtn">
+        <span class="material-icons outlined">
+            menu
+        </span>
+    </a>
+</nav>

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<main id="fullpage">
+  <section class="section">
+    <div class="mainbox">
+      <div class="mainbox__text">
+        누구나 쉽게 만드는<br>인공지능 기반 슬로건 대장간
+      </div>
+      <div class="mainbox__subtext">
+        한 번의 클릭으로 여러분만의 특별한 슬로건을 만들어 보세요
+      </div>
+      <script>
+        function formSubmit() {
+          if(fr.info.value == "") {
+            alert("기업 정보를 입력해 주세요.");
+            fr.info.focus();
+            return false;
+          }
+          else return true;
+        }
+      </script>
+      <form name='fr' action="/smithy/loading/" method="POST" onsubmit='return formSubmit();'>
+        {% csrf_token %}
+        <div class="inputbox">
+          <select class="Inputbox__selectArea" name="select" id="select">
+            <option value="ko_slogan">Korean</option>
+            <option value="en_slogan">English</option>
+            <option value="model_slogan">Beta Korean</option>
+          </select>
+          <input type="text" id='sch1' name="info" class="inputbox__inputtext" placeholder="기업설명 혹은 제품설명을 간략히 적어주세요."
+            onclick="this.placeholder=''" onblur="this.placeholder='기업설명 혹은 제품설명을 간략히 적어주세요.'" />
+          <div class="inputbox__controlbox">
+            <div class="range">
+              <div class="sliderValue">
+                <span class="valueNumber">35</span>
+              </div>
+              <div class="field">
+                <div class="value left">1</div>
+                <input class="valueInput" value="{{ sim }}" type="range" name='sim' min="1" max="70" step="1" />
+                <div class="value right">70</div>
+              </div>
+            </div>
+          </div>
+          <input type="submit" class="Inputbox__submitArea" value="" />
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="mainbox">
+      <div class="mainbox__text">
+        튜토리얼 영상을<br>따라 만들어 보세요
+      </div>
+        <iframe width="1024" height="576" src="https://www.youtube.com/embed/hX_58e64M9w" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <footer class="section fp-auto-height">
+    <hr>
+    <div class="slogan__footer">
+      <div>
+        <span>공지사항</span> |
+        <span>제휴문의</span> |
+        <span>서비스 소개</span>
+      </div>
+      <div>
+        <h6 class="slogan__logo">slogan smithy</h6>
+      </div>
+    </div>
+    </hr>
+  </footer>
+</main>
+
+{% endblock %}
